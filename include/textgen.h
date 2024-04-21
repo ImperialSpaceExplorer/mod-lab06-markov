@@ -12,14 +12,13 @@
 #include <ctime>
 #include <iterator>
 
-using namespace std;
 using u32    = uint_least32_t;
 using engine = std::mt19937;
 typedef deque<string> prefix;
 
-void finput(deque<string>* arr);
-void foutput(deque<string> arr);
+void finput(deque<std::string>* arr);
+void foutput(deque<std::string> arr);
 
-void generate(map<prefix, vector<string> > state_tab);
+void generate(map<prefix, vector<std::string> > state_tab);
 
-map<prefix, vector<string> > make_statetab();
+map<prefix, vector<std::string> > make_statetab();
