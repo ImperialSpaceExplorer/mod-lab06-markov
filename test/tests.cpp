@@ -7,14 +7,16 @@ typedef std::deque<std::string> prefix;
 std::string st = "Встретились на";
 //somewhy doesnt work with file func as it does on my pc
 prefix exp;//so this is an imitation of parsing specially for test
+int num = 0;
 std::stringstream s = std::stringstream(st);
 const char* const delimeter = " ";
 char* word = new char[100];
 while (s.read(word, sizeof(st))) {
 char* token = std::strtok(word, delimeter);
-while (token != nullptr) {
+while (num<2) {
 exp.push_back(std::string(token));
 token = std::strtok(nullptr, delimeter);
+num++
 }
 word = new char[100];
 }
@@ -35,7 +37,7 @@ prefix exp;//so this is an imitation of parsing specially for test
 int num = 0;
 std::stringstream s = std::stringstream(st);
 const char* const delimeter = " ";
-char* word = new char[100];
+char* word = new char[200];
 while (s.read(word, sizeof(st))) {
 char* token = std::strtok(word, delimeter);
 while (num < 3) {
