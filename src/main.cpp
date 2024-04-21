@@ -1,11 +1,11 @@
 // Copyright 2024 Maz
 #include <iostream>
-#include "../include/textgen.h"
+#include"textgen.h"
 
 int main()
 {
-	make_statetab();
-	generate();
-	return 0;
+map<prefix, vector<string> > state_tab;
+state_tab = make_statetab();
+generate(state_tab);
+return 0;
 }
-
