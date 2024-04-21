@@ -17,11 +17,8 @@ TEST(GenTest, MakePref) {
 		input >> word;
 		Prefix.push_back(word);
 	}
-	prefix eq{ "Р’СЃС‚СЂРµС‚РёР»РёСЃСЊ", "РЅР°" };
-	bool isit;
-	if (eq[0] == Prefix[0] && eq[1] == Prefix[1])isit = true;
-	else isit = false;
-  EXPECT_EQ(isit, true);
+	prefix eq{ "Встретились", "на" };
+  EXPECT_EQ(eq[0]+" "+eq[1], Prefix[0]+" "+Prefix[1]);
 }
 
 TEST(GenTest, MakePair) {
@@ -36,7 +33,7 @@ TEST(GenTest, MakePair) {
 	}
 	input >> word;
 	statetab[Prefix].push_back(word);
-	map<prefix, vector<string> >expect = { {prefix{"Р’СЃС‚СЂРµС‚РёР»РёСЃСЊ","РЅР°"},vector<string>{ "РґРѕСЂРѕРіРµ"}} };
+	map<prefix, vector<string> >expect = { {prefix{"Встретились","на"},vector<string>{ "дороге"}} };
 	EXPECT_EQ(expect[Prefix].at(0), statetab[Prefix].at(0));
 }
 
@@ -63,7 +60,7 @@ TEST(GenTest, OneSuffChoose) {
 	input.close();
 	vector<string> eq;
 	auto item = statetab.begin();
-	while (true) {
+	while (item!=statetab.end()) {
 		if (item->second.size() == 1) { eq = item->second; break; }
 		item = statetab.begin();
 		std::advance(item, rand() % statetab.size());
@@ -94,12 +91,12 @@ TEST(GenTest, MultSuffChoose) {
 	input.close();
 	vector<string> eq;
 	auto item = statetab.begin();
-	while (true) {
+	while (item != statetab.end()) {
 		if (item->second.size() != 1) { eq = item->second; break; }
 		item = statetab.begin();
 		std::advance(item, rand() % statetab.size());
 	}
-	EXPECT_EQ(eq.size() != 1, true);
+	EXPECT_EQ(eq.size() > 1, true);
 }
 
 TEST(GenTest, MakeText) {
