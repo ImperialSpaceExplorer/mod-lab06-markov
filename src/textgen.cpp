@@ -8,9 +8,8 @@ prefix cur;
 
 void finput(deque<string>* arr) {
 std::ifstream input("data.txt");
-private string word;
 deque<string> tmp;
-while (input >> word) {
+while (input >> const string word) {
 tmp.push_back(word);
 }
 *arr = tmp;
