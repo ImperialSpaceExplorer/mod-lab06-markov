@@ -9,8 +9,10 @@ prefix cur;
 void finput(std::deque<std::string>* arr) {
 std::ifstream input("data.txt");
 std::deque<std::string> tmp;
-while (input >> std::string word) {
-tmp.push_back(word);
+char* ch = new char[100];
+while (input >> ch) {
+tmp.push_back(std::string(ch));
+ch = new char[100];
 }
 *arr = tmp;
 }
