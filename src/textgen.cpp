@@ -9,16 +9,16 @@ prefix cur;
 void finput(std::deque<std::string>* arr) {
 std::ifstream input("data.txt");
 std::deque<std::string> tmp;
-while (input >> const std::string word) {
+while (input >> std::string word) {
 tmp.push_back(word);
 }
 *arr = tmp;
 }
-void foutput(std::deque<string> arr) {
+void foutput(std::deque<std::string> arr) {
 std::ofstream output("out.txt");
 for (int i = 0; i < arr.size(); i++) {
 output << arr[i] << " ";
-if (i % 10 == 0 && i != 0) output << endl;
+if (i % 10 == 0 && i != 0) output << std::endl;
 }
 output.close();
 }
@@ -27,7 +27,7 @@ void generate(std::map<prefix, std::vector<std::string> > state_tab) {
 std::map<prefix, std::vector<std::string> > st = state_tab;
 std::deque<std::string> arr;
 int num = 0, invec = 0;
-random_device os_seed;
+std::random_device os_seed;
 const u32 seed = os_seed();
 engine generator(seed);
 for (int i = 0; i < NPREF; i++) {
