@@ -13,7 +13,8 @@ TEST(GenTest, MakePref) {
 	string st = "Встретились на";	
 	string word;//somewhy doesnt work with file func as it does on my pc
 	prefix exp;//so this is an imitation of parsing specially for test
-	while (st >> word){         
+	stringstream s(st); 
+	while (s >> word){         
     	prefix.push_back(word);
 	}
 	prefix eq{ "Встретились", "на" };
@@ -28,6 +29,7 @@ TEST(GenTest, MakePair) {
 	string word;//somewhy doesnt work with file func as it does on my pc
 	prefix exp;//so this is an imitation of parsing specially for test
 	int num=0;
+	stringstream s(st); 
 	while (st >> word){         
     	if(num<2)prefix.push_back(word);
 	else statetab[exp].push_back(word);
