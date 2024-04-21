@@ -1,7 +1,7 @@
 // Copyright 2024 Maz
 #include <gtest/gtest.h>
 #include "../include/textgen.h"
-#include "../include/textgen.cpp"
+#include "../src/textgen.cpp"
 class GenTest : public testing::Test {
 protected:
 	typedef deque<string> prefix;
