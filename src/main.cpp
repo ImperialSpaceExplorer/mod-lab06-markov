@@ -1,5 +1,5 @@
 ﻿#include <iostream>
-#include"textgen.h"
+#include "../include/textgen.h"
 
 int main()
 {
