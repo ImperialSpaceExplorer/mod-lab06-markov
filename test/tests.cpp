@@ -42,7 +42,8 @@ while (num < 3) {
 if(num < 2) {exp.push_back(token);
 } else {
 statetab.insert( std::pair<prefix,
-std::vector<std::string>>(exp, std::string(token)) );
+std::vector<std::string>>(exp, std::vector<std::string>
+{std::string(token)}) );
 }
 token = std::strtok(nullptr, delimeter);
 num++;
