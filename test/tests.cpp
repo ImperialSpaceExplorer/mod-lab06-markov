@@ -13,10 +13,10 @@ const char* const delimeter = " ";
 char* word = new char[100];
 while (s.read(word, sizeof(st))) {
 char* token = std::strtok(word, delimeter);
-while (num<2) {
+while (num < 2) {
 exp.push_back(std::string(token));
 token = std::strtok(nullptr, delimeter);
-num++
+num++;
 }
 word = new char[100];
 }
