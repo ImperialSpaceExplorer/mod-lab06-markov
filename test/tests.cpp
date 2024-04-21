@@ -1,6 +1,7 @@
 // Copyright 2024 Maz
 #include <gtest/gtest.h>
 #include "../include/textgen.h"
+#include "../include/textgen.cpp"
 class GenTest : public testing::Test {
 protected:
 	typedef deque<string> prefix;
@@ -9,55 +10,29 @@ protected:
 
 TEST(GenTest, MakePref) {
 	typedef deque<string> prefix;
-	map<prefix, vector<string> > statetab;
-	std::ifstream input("data.txt");
-	string word;
-	prefix Prefix;
-	for (int i = 0; i < 2; i++) {
-		input >> word;
-		Prefix.push_back(word);
-	}
-	prefix eq{ "Встретились", "на" };
-  EXPECT_EQ(eq[0]+" "+eq[1], Prefix[0]+" "+Prefix[1]);
+	deque<string> arr;
+	finput(&arr);
+	prefix exp{arr[0],arr[1]}; 
+	prefix eq{ "Р’СЃС‚СЂРµС‚РёР»РёСЃСЊ", "РЅР°" };
+  EXPECT_EQ(eq[0]+" "+eq[1], exp[0]+" "+exp[1]);
 }
 
 TEST(GenTest, MakePair) {
 	typedef deque<string> prefix;
 	map<prefix, vector<string> > statetab;
-	std::ifstream input("data.txt");
-	string word;
-	prefix Prefix;
-	for (int i = 0; i < 2; i++) {
-		input >> word;
-		Prefix.push_back(word);
-	}
-	input >> word;
-	statetab[Prefix].push_back(word);
-	map<prefix, vector<string> >expect = { {prefix{"Встретились","на"},vector<string>{ "дороге"}} };
-	EXPECT_EQ(expect[Prefix].at(0), statetab[Prefix].at(0));
+	deque<string> arr;
+	finput(&arr);
+	prefix exp; exp.push_back(arr[0]); exp.push_back(arr[1]);
+	statetab[exp].push_back(arr[2]);
+	prefix pr{ "Р’СЃС‚СЂРµС‚РёР»РёСЃСЊ","РЅР°" };
+	map<prefix, vector<string> >eq = { {pr,vector<string>{ "РґРѕСЂРѕРіРµ"}} };
+	EXPECT_EQ(exp[0]+" "+exp[1]+" "+ statetab[exp].at(0), pr[0]+" "+pr[1]+" "+eq[pr].at(0));
 }
 
 TEST(GenTest, OneSuffChoose) {
 	typedef deque<string> prefix;
 	map<prefix, vector<string> > statetab;
-	std::ifstream input("data.txt");
-	string word;
-	prefix Prefix, cur;
-	for (int i = 0; i < 2 + 1; i++) {
-		input >> word;
-		if (i != 2) { Prefix.push_back(word); cur.push_back(word); }
-		else { statetab[Prefix].push_back(word); }
-	}
-	Prefix.pop_front();
-	Prefix.push_back(word);
-
-	while (input >> word) {
-		statetab[Prefix].push_back(word);
-		Prefix.pop_front();
-		Prefix.push_back(word);
-	}
-
-	input.close();
+	statetab = make_statetab();
 	vector<string> eq;
 	auto item = statetab.begin();
 	while (item!=statetab.end()) {
@@ -71,24 +46,7 @@ TEST(GenTest, OneSuffChoose) {
 TEST(GenTest, MultSuffChoose) {
 	typedef deque<string> prefix;
 	map<prefix, vector<string> > statetab;
-	std::ifstream input("data.txt");
-	string word;
-	prefix Prefix, cur;
-	for (int i = 0; i < 2 + 1; i++) {
-		input >> word;
-		if (i != 2) { Prefix.push_back(word); cur.push_back(word); }
-		else { statetab[Prefix].push_back(word); }
-	}
-	Prefix.pop_front();
-	Prefix.push_back(word);
-
-	while (input >> word) {
-		statetab[Prefix].push_back(word);
-		Prefix.pop_front();
-		Prefix.push_back(word);
-	}
-
-	input.close();
+	statetab = make_statetab();
 	vector<string> eq;
 	auto item = statetab.begin();
 	while (item != statetab.end()) {
@@ -103,12 +61,14 @@ TEST(GenTest, MakeText) {
 	typedef deque<string> prefix;
 	map<prefix, vector<string> > statetab;
 	int num = 0;
-	prefix cur{ "Встретились","на" };
-	string eq = cur[0] + " " + cur[1];
+	prefix curr{ "Встретились","на" };
+	string eq = curr[0] + " " + curr[1];
 	map<prefix, vector<string> >expect = { {prefix{"Встретились","на"},vector<string>{ "дороге"}} ,{prefix{"на","дороге"},vector<string>{ "барин"}},{prefix{"дороге","барин"},vector<string>{ "и"}},{prefix{"барин","и"},vector<string>{ "мужик."}} };
-	while (expect.find(cur) != expect.end() && num < 10) {
-		eq = eq + " " + expect[cur].at(0);
-		cur[0] = cur[1]; cur[1] = expect[cur].at(0);
+	while (expect.find(curr) != expect.end() && num < 10) {
+		eq = eq + " " + expect[curr].at(0);
+		prefix tmp;
+		tmp.push_back (curr[1]); tmp.push_back(expect[curr].at(0));
+		curr = tmp;
 		num++;
 	}
 	string ex = "Встретились на дороге барин и мужик.";
