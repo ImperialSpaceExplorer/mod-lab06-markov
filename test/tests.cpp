@@ -14,8 +14,14 @@ TEST(GenTest, MakePref) {
 	string word;//somewhy doesnt work with file func as it does on my pc
 	prefix exp;//so this is an imitation of parsing specially for test
 	stringstream s(st); 
-	while (s >> word){         
-    	exp.push_back(word);
+	const char* const delimeter = " ";
+	while (std::getline(s, word)){   
+	char* token = std::strtok(word.data(), delimeter);
+	while (token != nullptr)
+    	{         
+        exp.push_back(token);            
+        token = std::strtok(nullptr, delimeter);               
+    	}
 	}
 	prefix eq{ "Встретились", "на" };
 	string exp_s = exp[0] + " " + exp[1], eq_s = eq[0] + " " + eq[1];
@@ -30,10 +36,16 @@ TEST(GenTest, MakePair) {
 	prefix exp;//so this is an imitation of parsing specially for test
 	int num=0;
 	stringstream s(st); 
-	while (st >> word){         
-    	if(num<2)exp.push_back(word);
-	else statetab[exp].push_back(word);
+	const char* const delimeter = " ";
+	while (std::getline(s, word)){   
+	char* token = std::strtok(word.data(), delimeter);
+	while (num<3)
+    	{         
+        if(num<2)exp.push_back(token);     
+	else statetab[exp].push_back(token);
+        token = std::strtok(nullptr, delimeter);        
 	num++;
+    	}
 	}
 	prefix pr{ "Встретились ","на" };
 	map<prefix, vector<string> >eq = { {pr,vector<string>{ "дороге"}} };
