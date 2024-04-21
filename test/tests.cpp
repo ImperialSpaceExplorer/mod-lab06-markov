@@ -3,23 +3,25 @@
 #include "../include/textgen.h"
 class GenTest : public testing::Test{
  protected:
-typedef deque<string> prefix;
-map<prefix, vector<string> > statetab;
+typedef std::deque<std::string> prefix;
+std::map<prefix, std::vector<std::string> > statetab;
 };
 
 TEST(GenTest, MakePref) {
-typedef deque<string> prefix;
+typedef std::deque<std::string> prefix;
 const char st[] = "Встретились на";
 //somewhy doesnt work with file func as it does on my pc
-private prefix exp;//so this is an imitation of parsing specially for test
-stringstream s(st);
+prefix exp;//so this is an imitation of parsing specially for test
+std::stringstream s(st);
 const char* const delimeter = " ";
-while (std::getline(s, const string word)) {
+char* word = new char[100];
+while (std::getline(s, word)) {
 char* token = std::strtok(word.data(), delimeter);
 while (token != nullptr) {
 exp.push_back(token);
 token = std::strtok(nullptr, delimeter);
 }
+word = new char[100];
 }
 prefix eq{ "Встретились", "на" };
 const char exp_s[] = exp[0] + " " + exp[1], eq_s = eq[0] + " " + eq[1];
@@ -27,15 +29,16 @@ EXPECT_EQ(eq_s, exp_s);
 }
 
 TEST(GenTest, MakePair) {
-typedef deque<string> prefix;
-map<prefix, vector<string> > statetab;
+typedef std::deque<std::string> prefix;
+std::map<prefix, std::vector<std::string> > statetab;
 const char st[] = "Встретились на дороге";
 //somewhy doesnt work with file func as it does on my pc
 prefix exp;//so this is an imitation of parsing specially for test
 private int num = 0;
 stringstream s(st);
 const char* const delimeter = " ";
-while (std::getline(s, const string word)) {
+char* word = new char[100];
+while (std::getline(s, word)) {
 char* token = std::strtok(word.data(), delimeter);
 while (num < 3) {
 if(num < 2)exp.push_back(token);
@@ -44,22 +47,23 @@ statetab[exp].push_back(token);
 token = std::strtok(nullptr, delimeter);
 num++;
 }
+word = new char[100];
 }
 prefix pr{ "Встретились" , "на" };
-map<prefix , vector<string> >eq = { {pr , vector<string>{ "дороге"}} };
+std::map<prefix , std::vector<std::string> >eq = { {pr , std::vector<std::string>{ "дороге"}} };
 const char exp_s[] = exp[0] + " " + exp[1] + " " + statetab[exp].at(0) ,
 pr_s = pr[0] + " " + pr[1] + " " + eq[pr].at(0);
 EXPECT_EQ(exp_s, pr_s);
 }
 
 TEST(GenTest, OneSuffChoose) {
-typedef deque<string> prefix;
-map<prefix, vector<string> > statetab;
+typedef std::deque<std::string> prefix;
+std::map<prefix, std::vector<std::string> > statetab;
 statetab = { {prefix{"Встретились", "на"},
-vector<string>{ "дороге"}}, {prefix{"на", "дороге"}, vector<string>{ "барин"}},
-{prefix{"дороге", "барин"}, vector<string>{ "и"}}, {prefix{"барин", "и"},
-vector<string>{ "мужик."}} };
-vector<string> eq;
+std::vector<std::string>{ "дороге"}}, {prefix{"на", "дороге"}, std::vector<std::string>{ "барин"}},
+{prefix{"дороге", "барин"}, std::vector<std::string>{ "и"}}, {prefix{"барин", "и"},
+std::vector<std::string>{ "мужик."}} };
+std::vector<std::string> eq;
 auto item = statetab.begin();
 while (item != statetab.end()) {
 if (item->second.size() == 1) { eq = item->second; break; }
@@ -70,14 +74,14 @@ EXPECT_EQ(eq.size() == 1, true);
 }
 
 TEST(GenTest, MultSuffChoose) {
-typedef deque<string> prefix;
-map<prefix, vector<string> > statetab;
+typedef std::deque<std::string> prefix;
+std::map<prefix, std::vector<std::string> > statetab;
 statetab = { {prefix{"Встретились", "на"},
-vector<string> { "дороге", "пути"}} , {prefix{"на", "дороге"},
-vector<string>{ "барин"}}, {prefix {"дороге", "барин"},
-vector<string> { "и"}}, {prefix {"барин", "и"},
-vector<string> { "мужик."}} };
-vector<string> eq;
+std::vector<std::string> { "дороге", "пути"}} , {prefix{"на", "дороге"},
+std::vector<std::string>{ "барин"}}, {prefix {"дороге", "барин"},
+std::vector<std::string> { "и"}}, {prefix {"барин", "и"},
+std::vector<std::string> { "мужик."}} };
+std::vector<std::string> eq;
 auto item = statetab.begin();
 while (item != statetab.end()) {
 if (item->second.size() != 1) { eq = item->second; break; }
@@ -88,15 +92,14 @@ EXPECT_EQ(eq.size() > 1, true);
 }
 
 TEST(GenTest, MakeText) {
-typedef deque<string> prefix;
-map<prefix, vector<string> > statetab;
+typedef std::deque<std::string> prefix;
+std::map<prefix, std::vector<std::string> > statetab;
 int num = 0;
 prefix curr { "Встретились", "на" }, all { "Встретились", "на" };
-//const string eq = curr[0] + " " + curr[1];
-map<prefix, vector<string> >expect = { {prefix{"Встретились", "на"},
-vector<string>{ "дороге"}} , {prefix{"на", "дороге"}, vector<string>{ "барин"}},
-{prefix{"дороге", "барин"}, vector<string>{ "и"}}, {prefix{"барин", "и"},
-vector<string>{ "мужик."}} };
+std::map<prefix, std::vector<std::string> >expect = { {prefix{"Встретились", "на"},
+std::vector<std::string>{ "дороге"}} , {prefix{"на", "дороге"}, std::vector<std::string>{ "барин"}},
+{prefix{"дороге", "барин"}, std::vector<std::string>{ "и"}}, {prefix{"барин", "и"},
+std::vector<std::string>{ "мужик."}} };
 while (expect.find(curr) != expect.end() && num < 10) {
 all.push_back(expect[curr].at(0));
 prefix tmp;
