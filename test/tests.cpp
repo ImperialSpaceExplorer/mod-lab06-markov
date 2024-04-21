@@ -4,7 +4,7 @@
 
 TEST(Test1, MakePref) {
 typedef std::deque<std::string> prefix;
-const char st[] = "Встретились на";
+std::string st = "Встретились на";
 //somewhy doesnt work with file func as it does on my pc
 prefix exp;//so this is an imitation of parsing specially for test
 std::stringstream s = std::stringstream(st);
@@ -29,7 +29,7 @@ EXPECT_EQ(eq_s, exp_s);
 TEST(Test2, MakePair) {
 typedef std::deque<std::string> prefix;
 std::map<prefix, std::vector<std::string> > statetab;
-const char st[] = "Встретились на дороге";
+std::string st[] = "Встретились на дороге";
 //somewhy doesnt work with file func as it does on my pc
 prefix exp;//so this is an imitation of parsing specially for test
 int num = 0;
