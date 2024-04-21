@@ -14,7 +14,8 @@ TEST(GenTest, MakePref) {
 	finput(&arr);
 	prefix exp{arr[0],arr[1]}; 
 	prefix eq{ "Р’СЃС‚СЂРµС‚РёР»РёСЃСЊ", "РЅР°" };
-  EXPECT_EQ(eq[0]+" "+eq[1], exp[0]+" "+exp[1]);
+	string exp_s = exp[0] + " " + exp[1], eq_s = eq[0] + " " + eq[1];
+  EXPECT_EQ(eq_s, exp_s);
 }
 
 TEST(GenTest, MakePair) {
@@ -26,7 +27,8 @@ TEST(GenTest, MakePair) {
 	statetab[exp].push_back(arr[2]);
 	prefix pr{ "Р’СЃС‚СЂРµС‚РёР»РёСЃСЊ","РЅР°" };
 	map<prefix, vector<string> >eq = { {pr,vector<string>{ "РґРѕСЂРѕРіРµ"}} };
-	EXPECT_EQ(exp[0]+" "+exp[1]+" "+ statetab[exp].at(0), pr[0]+" "+pr[1]+" "+eq[pr].at(0));
+	string exp_s = exp[0] + " " + exp[1] + " " + statetab[exp].at(0), pr_s = pr[0] + " " + pr[1] + " " + eq[pr].at(0);
+	EXPECT_EQ(exp_s, pr_s);
 }
 
 TEST(GenTest, OneSuffChoose) {
