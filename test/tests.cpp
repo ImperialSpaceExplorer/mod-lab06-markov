@@ -48,7 +48,8 @@ while (num < 3) {
 if(num < 2) {exp.push_back(token);
 } else {
 statetab[exp].resize(statetab[exp].size()+1);
-if(statetab[exp].size() >= 1)statetab[exp].at(statetab[exp].size()-1).push_back(token);
+if(statetab[exp].size() >= 1)
+statetab[exp].push_back(token);
 }
 token = std::strtok(nullptr, delimeter);
 num++;
