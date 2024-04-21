@@ -34,7 +34,7 @@ engine generator(seed);
 for (int i = 0; i < NPREF; i++) {
 arr.push_back(cur[i]);
 }
-while (st.find(cur) != st.end()&&num<MAXGEN-2) {
+while (st.find(cur) != st.end() && num < MAXGEN-2) {
 std::uniform_int_distribution< u32 > distribute(0, st[cur].size()-1);
 invec = distribute(generator);
 arr.push_back(st[cur].at(invec));
