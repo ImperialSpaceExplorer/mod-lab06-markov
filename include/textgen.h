@@ -11,6 +11,7 @@
 #include <random>
 #include <ctime>
 #include <iterator>
+#include <sstream>
 
 using u32    = uint_least32_t;
 using engine = std::mt19937;
