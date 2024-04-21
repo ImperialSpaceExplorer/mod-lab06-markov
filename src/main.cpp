@@ -2,8 +2,7 @@
 #include <iostream>
 #include"textgen.h"
 
-int main()
-{
+int main(){
 map<prefix, vector<string> > state_tab;
 state_tab = make_statetab();
 generate(state_tab);
