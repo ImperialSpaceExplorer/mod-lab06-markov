@@ -1,8 +1,6 @@
-// Copyright 2021 GHA Test Team
-#include "pch.h"
+// Copyright 2024 Maz
 #include <gtest/gtest.h>
-#include "..//src/textgen.h"
-
+#include "../include/textgen.h"
 class GenTest : public testing::Test {
 protected:
 	typedef deque<string> prefix;
