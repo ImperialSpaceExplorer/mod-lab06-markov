@@ -1,4 +1,4 @@
-// Copyright 2024 Me
+// Copyright 2024 Maz
 
 #pragma once
 #include <iostream>
@@ -14,7 +14,11 @@
 using namespace std;
 using u32    = uint_least32_t;
 using engine = std::mt19937;
+typedef deque<string> prefix;
 
-void generate();
+void finput(deque<string>* arr);
+void foutput(deque<string> arr);
 
-void make_statetab();
+void generate(map<prefix, vector<string> > state_tab);
+
+map<prefix, vector<string> > make_statetab();
