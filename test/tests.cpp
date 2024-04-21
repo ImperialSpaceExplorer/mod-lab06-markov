@@ -13,7 +13,7 @@ char* word = new char[100];
 while (s.read(word, sizeof(st))) {
 char* token = std::strtok(word, delimeter);
 while (token != nullptr) {
-exp.push_back(token);
+exp.push_back(std::string(token));
 token = std::strtok(nullptr, delimeter);
 }
 word = new char[100];
@@ -41,9 +41,8 @@ char* token = std::strtok(word, delimeter);
 while (num < 3) {
 if(num < 2) {exp.push_back(token);
 } else {
-statetab[exp].resize(statetab[exp].size()+1);
-if(statetab[exp].size() >= 1)
-statetab[exp].push_back(token);
+statetab.insert( std::pair<prefix,
+std::vector<std::string>>(exp, std::string(token)) );
 }
 token = std::strtok(nullptr, delimeter);
 num++;
