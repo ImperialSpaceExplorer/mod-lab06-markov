@@ -24,7 +24,7 @@ token = std::strtok(nullptr, delimeter);
 word = new char[100];
 }
 prefix eq{ "Встретились", "на" };
-char* exp_s[] = exp[0] + " " + exp[1], eq_s = eq[0] + " " + eq[1];
+char* exp_s = exp[0] + " " + exp[1], eq_s = eq[0] + " " + eq[1];
 EXPECT_EQ(eq_s, exp_s);
 }
 
@@ -52,7 +52,7 @@ word = new char[100];
 prefix pr{ "Встретились" , "на" };
 std::map<prefix , std::vector<std::string> >eq = {
 {pr, std::vector<std::string>{ "дороге"}} };
-char* exp_s[] = exp[0] + " " + exp[1] + " " + statetab[exp].at(0),
+char* exp_s = exp[0] + " " + exp[1] + " " + statetab[exp].at(0),
 pr_s = pr[0] + " " + pr[1] + " " + eq[pr].at(0);
 EXPECT_EQ(exp_s, pr_s);
 }
@@ -113,8 +113,8 @@ tmp.push_back(curr[1]); tmp.push_back(expect[curr].at(0));
 curr = tmp;
 num++;
 }
-char* eq[] = all[0] + " " + all[1] + " " + all[2] + " "
+char* eq = all[0] + " " + all[1] + " " + all[2] + " "
 + all[3] + " " + all[4] + " " + all[5];
-char* ex[] = "Встретились на дороге барин и мужик.";
+char* ex = "Встретились на дороге барин и мужик.";
 EXPECT_EQ(eq, ex);
 }
