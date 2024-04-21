@@ -25,10 +25,11 @@ word = new char[100];
 }
 prefix eq{ "Встретились", "на" };
 char* exp_s = const_cast<char*>(exp[0].c_str()) +
-std::string(" ").c_str() +
-const_cast<char*>(exp[1].c_str()),
-eq_s = const_cast<char*>(eq[0].c_str()) +
-std::string(" ").c_str() + const_cast<char*>(eq[1].c_str());
+const_cast<char*>(std::string(" ").c_str()) +
+const_cast<char*>(exp[1].c_str());
+char* eq_s = const_cast<char*>(eq[0].c_str()) +
+const_cast<char*>(std::string(" ").c_str()) +
+const_cast<char*>(eq[1].c_str());
 EXPECT_EQ(std::string(eq_s), std::string(exp_s));
 }
 
@@ -57,12 +58,14 @@ prefix pr{ "Встретились" , "на" };
 std::map<prefix , std::vector<std::string> >eq = {
 {pr, std::vector<std::string>{ "дороге"}} };
 char* exp_s = const_cast<char*>(exp[0].c_str()) +
-std::string(" ").c_str() +
-const_cast<char*>(exp[1].c_str()) + std::string(" ").c_str() +
-const_cast<char*>(statetab[exp].at(0).c_str()),
-pr_s = const_cast<char*>(pr[0].c_str()) +
-std::string(" ").c_str() +
-const_cast<char*>(pr[1].c_str()) + std::string(" ").c_str() +
+const_cast<char*>(std::string(" ").c_str()) +
+const_cast<char*>(exp[1].c_str()) +
+const_cast<char*>(std::string(" ").c_str()) +
+const_cast<char*>(statetab[exp].at(0).c_str());
+char* pr_s = const_cast<char*>(pr[0].c_str()) +
+const_cast<char*>(std::string(" ").c_str()) +
+const_cast<char*>(pr[1].c_str()) +
+const_cast<char*>(std::string(" ").c_str()) +
 const_cast<char*>(eq[pr].at(0).c_str());
 EXPECT_EQ(std::string(exp_s), std::string(pr_s));
 }
@@ -124,11 +127,15 @@ curr = tmp;
 num++;
 }
 char* eq = const_cast<char*>(all[0].c_str()) +
-std::string(" ").c_str() +
-const_cast<char*>(all[1].c_str()) + std::string(" ").c_str() +
-const_cast<char*>(all[2].c_str()) + std::string(" ").c_str()
-+ const_cast<char*>(all[3].c_str()) + std::string(" ").c_str() +
-const_cast<char*>(all[4].c_str()) + std::string(" ").c_str() +
+const_cast<char*>(std::string(" ").c_str()) +
+const_cast<char*>(all[1].c_str()) +
+const_cast<char*>(std::string(" ").c_str()) +
+const_cast<char*>(all[2].c_str()) +
+const_cast<char*>(std::string(" ").c_str())
++ const_cast<char*>(all[3].c_str()) +
+const_cast<char*>(std::string(" ").c_str()) +
+const_cast<char*>(all[4].c_str()) +
+const_cast<char*>(std::string(" ").c_str()) +
 const_cast<char*>(all[5].c_str());
 const char ex[] = "Встретились на дороге барин и мужик.";
 EXPECT_EQ(std::string(eq), std::string(ex));
