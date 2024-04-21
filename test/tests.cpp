@@ -29,7 +29,7 @@ EXPECT_EQ(eq_s, exp_s);
 TEST(Test2, MakePair) {
 typedef std::deque<std::string> prefix;
 std::map<prefix, std::vector<std::string> > statetab;
-std::string st[] = "Встретились на дороге";
+std::string st = "Встретились на дороге";
 //somewhy doesnt work with file func as it does on my pc
 prefix exp;//so this is an imitation of parsing specially for test
 int num = 0;
