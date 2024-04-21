@@ -6,15 +6,15 @@ const int MAXGEN = 1000;
 
 prefix cur;
 
-void finput(deque<string>* arr) {
+void finput(std::deque<std::string>* arr) {
 std::ifstream input("data.txt");
-deque<string> tmp;
-while (input >> const string word) {
+std::deque<std::string> tmp;
+while (input >> const std::string word) {
 tmp.push_back(word);
 }
 *arr = tmp;
 }
-void foutput(deque<string> arr) {
+void foutput(std::deque<string> arr) {
 std::ofstream output("out.txt");
 for (int i = 0; i < arr.size(); i++) {
 output << arr[i] << " ";
@@ -23,9 +23,9 @@ if (i % 10 == 0 && i != 0) output << endl;
 output.close();
 }
 
-void generate(map<prefix, vector<string> > state_tab) {
-map<prefix, vector<string> > st = state_tab;
-deque<string> arr;
+void generate(std::map<prefix, std::vector<std::string> > state_tab) {
+std::map<prefix, std::vector<std::string> > st = state_tab;
+std::deque<std::string> arr;
 int num = 0, invec = 0;
 random_device os_seed;
 const u32 seed = os_seed();
@@ -46,9 +46,9 @@ num++;
 foutput(arr);
 }
 
-map<prefix, vector<string> > make_statetab() {
-map<prefix, vector<string> > st;
-deque<string> words;
+std::map<prefix, std::vector<std::string> > make_statetab() {
+std::map<prefix, std::vector<std::string> > st;
+std::deque<std::string> words;
 finput(&words);
 prefix Prefix;
 for (int i = 0; i < NPREF + 1; i++) {
