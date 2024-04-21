@@ -15,7 +15,7 @@ TEST(GenTest, MakePref) {
 	prefix exp;//so this is an imitation of parsing specially for test
 	stringstream s(st); 
 	while (s >> word){         
-    	prefix.push_back(word);
+    	exp.push_back(word);
 	}
 	prefix eq{ "Встретились", "на" };
 	string exp_s = exp[0] + " " + exp[1], eq_s = eq[0] + " " + eq[1];
@@ -31,7 +31,7 @@ TEST(GenTest, MakePair) {
 	int num=0;
 	stringstream s(st); 
 	while (st >> word){         
-    	if(num<2)prefix.push_back(word);
+    	if(num<2)exp.push_back(word);
 	else statetab[exp].push_back(word);
 	num++;
 	}
