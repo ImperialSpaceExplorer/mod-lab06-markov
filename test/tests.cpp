@@ -24,10 +24,10 @@ token = std::strtok(nullptr, delimeter);
 word = new char[100];
 }
 prefix eq{ "Встретились", "на" };
-char* exp_s = const_cast<char*>(exp[0] +
+char* exp_s = (exp[0] +
 std::string(" ") +
 exp[1]).c_str();
-char* eq_s = const_cast<char*>(eq[0] +
+char* eq_s = (eq[0] +
 std::string(" ") + eq[1]).c_str();
 EXPECT_EQ(std::string(eq_s), std::string(exp_s));
 }
@@ -56,10 +56,10 @@ word = new char[100];
 prefix pr{ "Встретились" , "на" };
 std::map<prefix , std::vector<std::string> >eq = {
 {pr, std::vector<std::string>{ "дороге"}} };
-char* exp_s = const_cast<char*>(exp[0] +
+char* exp_s = (exp[0] +
 std::string(" ") + exp[1] + std::string(" ") +
 statetab[exp].at(0)).c_str();
-char* pr_s = const_cast<char*>(pr[0] +
+char* pr_s = (pr[0] +
 std::string(" ") + pr[1] + std::string(" ") +
 eq[pr].at(0)).c_str();
 EXPECT_EQ(std::string(exp_s), std::string(pr_s));
@@ -121,7 +121,7 @@ tmp.push_back(curr[1]); tmp.push_back(expect[curr].at(0));
 curr = tmp;
 num++;
 }
-char* eq = const_cast<char*>(all[0] +
+char* eq = (all[0] +
 std::string(" ") + all[1] + std::string(" ") +
 all[2] + std::string(" ") + all[3] +
 std::string(" ") + all[4] + std::string(" ") +
