@@ -1,4 +1,5 @@
-﻿#include <iostream>
+// Copyright 2024 Maz
+#include <iostream>
 #include "../include/textgen.h"
 
 int main()
