@@ -45,10 +45,10 @@ char* word = new char[100];
 while (s.read(word, sizeof(st))) {
 char* token = std::strtok(word, delimeter);
 while (num < 3) {
-if(num < 2)exp.push_back(token);
-else {
-statetab.resize(statetab.size()+1);
-if(statetab.size()>=1)statetab[statetab.size()-1].push_back(token);
+if(num < 2) {exp.push_back(token);
+} else {
+statetab[exp].resize(statetab[exp].size()+1);
+if(statetab[exp].size() >= 1)statetab[exp].at(statetab[exp].size()-1).push_back(token);
 }
 token = std::strtok(nullptr, delimeter);
 num++;
