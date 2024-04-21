@@ -1,4 +1,4 @@
-#include"textgen.h"
+#include "../include/textgen.h"
 
 typedef deque<string> prefix;  
 map<prefix, vector<string> > statetab;
