@@ -29,7 +29,7 @@ std::string(" ") +
 exp[1]).c_str();
 const char* eq_s = (eq[0] +
 std::string(" ") + eq[1]).c_str();
-EXPECT_EQ(std::string(eq_s), std::string(exp_s));
+EXPECT_EQ(std::string(&*eq_s), std::string(&*exp_s));
 }
 
 TEST(GenTest, MakePair) {
@@ -46,8 +46,10 @@ while (s.read(word, sizeof(st))) {
 char* token = std::strtok(word, delimeter);
 while (num < 3) {
 if(num < 2)exp.push_back(token);
-else
-statetab[exp].push_back(token);
+else {
+statetab.resize(statetab.size()+1);
+if(statetab.size()>=1)statetab[statetab.size()-1].push_back(token);
+}
 token = std::strtok(nullptr, delimeter);
 num++;
 }
@@ -62,7 +64,7 @@ statetab[exp].at(0)).c_str();
 const char* pr_s = (pr[0] +
 std::string(" ") + pr[1] + std::string(" ") +
 eq[pr].at(0)).c_str();
-EXPECT_EQ(std::string(exp_s), std::string(pr_s));
+EXPECT_EQ(std::string(&*exp_s), std::string(&*pr_s));
 }
 
 TEST(GenTest, OneSuffChoose) {
@@ -127,5 +129,5 @@ all[2] + std::string(" ") + all[3] +
 std::string(" ") + all[4] + std::string(" ") +
 all[5]).c_str();
 const char ex[] = "Встретились на дороге барин и мужик.";
-EXPECT_EQ(std::string(eq), std::string(ex));
+EXPECT_EQ(std::string(&*eq), std::string(ex));
 }
