@@ -14,11 +14,11 @@
 
 using u32    = uint_least32_t;
 using engine = std::mt19937;
-typedef deque<string> prefix;
+typedef std::deque<std::string> prefix;
 
-void finput(deque<std::string>* arr);
-void foutput(deque<std::string> arr);
+void finput(std::deque<std::string>* arr);
+void foutput(std::deque<std::string> arr);
 
-void generate(map<prefix, vector<std::string> > state_tab);
+void generate(std::map<prefix, std::vector<std::string> > state_tab);
 
-map<prefix, vector<std::string> > make_statetab();
+std::map<prefix, std::vector<std::string> > make_statetab();
