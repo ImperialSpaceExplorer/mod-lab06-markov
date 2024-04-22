@@ -4,75 +4,36 @@
 
 TEST(Test1, MakePref) {
 typedef std::deque<std::string> prefix;
-std::string st = "Встретились на";
-//somewhy doesnt work with file func as it does on my pc
-prefix exp;//so this is an imitation of parsing specially for test
-int num = 0;
-std::stringstream s = std::stringstream(st);
-const char* const delimeter = " ";
-char* word = new char[100];
-while (s.read(word, sizeof(st))) {
-char* token = std::strtok(word, delimeter);
-while (num < 2) {
-exp.push_back(std::string(token));
-token = std::strtok(nullptr, delimeter);
-num++;
-}
-word = new char[100];
-}
+const char* st = "Встретились на";
+prefix exp;
+std::vector<std::string> strs = chstr_to_vecstr(st);
+exp.push_back(strs[0]); exp.push_back(strs[1]);
 prefix eq{ "Встретились", "на" };
-std::string exp_s = exp[0] +
-std::string(" ") + exp[1];
-std::string eq_s = eq[0] +
-std::string(" ") + eq[1];
-EXPECT_EQ(eq_s, exp_s);
+EXPECT_EQ(exp, eq);
 }
 
 TEST(Test2, MakePair) {
 typedef std::deque<std::string> prefix;
 std::map<prefix, std::vector<std::string> > statetab;
-std::string st = "Встретились на дороге";
-//somewhy doesnt work with file func as it does on my pc
-prefix exp;//so this is an imitation of parsing specially for test
-int num = 0;
-std::stringstream s = std::stringstream(st);
-const char* const delimeter = " ";
-char* word = new char[200];
-while (s.read(word, sizeof(st))) {
-char* token = std::strtok(word, delimeter);
-while (num < 3) {
-if(num < 2) {exp.push_back(token);
-} else {
-statetab.insert( std::pair<prefix,
-std::vector<std::string>>(exp, std::vector<std::string>
-{std::string(token)}) );
-}
-token = std::strtok(nullptr, delimeter);
-num++;
-}
-word = new char[100];
-}
+const char* st = "Встретились на дороге";
+prefix exp;
+std::vector<std::string> strs = chstr_to_vecstr(st);
+exp.push_back(strs[0]); exp.push_back(strs[1]);
+statetab[exp] = strs[2];
 prefix pr{ "Встретились" , "на" };
 std::map<prefix , std::vector<std::string> >eq = {
-{pr, std::vector<std::string>{ "дороге"}} };
-std::string exp_s = exp[0] +
-std::string(" ") + exp[1] + std::string(" ") +
-statetab[exp].at(0);
-std::string pr_s = pr[0] +
-std::string(" ") + pr[1] + std::string(" ") +
-eq[pr].at(0);
-EXPECT_EQ(exp_s, pr_s);
+{pr, { "дороге"}} };
+EXPECT_EQ(statetab[exp],
+eq[pr]);
 }
 
 TEST(Test3, OneSuffChoose) {
 typedef std::deque<std::string> prefix;
 std::map<prefix, std::vector<std::string> > statetab;
-statetab = { {prefix{"Встретились", "на"},
-std::vector<std::string>{ "дороге"}}, {prefix{"на", "дороге"},
-std::vector<std::string>{ "барин"}},
-{prefix{"дороге", "барин"}, std::vector<std::string>{
-"и"}}, {prefix{"барин", "и"},
-std::vector<std::string>{ "мужик."}} };
+statetab = { {{"Встретились", "на"},
+{ "дороге"}}, {{"на", "дороге"}, { "барин"}},
+{{"дороге", "барин"}, {"и"}}, {{"барин", "и"},
+{ "мужик."}} };
 std::vector<std::string> eq;
 auto item = statetab.begin();
 while (item != statetab.end()) {
@@ -86,11 +47,9 @@ EXPECT_EQ(eq.size() == 1, true);
 TEST(Test4, MultSuffChoose) {
 typedef std::deque<std::string> prefix;
 std::map<prefix, std::vector<std::string> > statetab;
-statetab = { {prefix{"Встретились", "на"},
-std::vector<std::string> { "дороге", "пути"}} , {prefix{"на", "дороге"},
-std::vector<std::string>{ "барин"}}, {prefix {"дороге", "барин"},
-std::vector<std::string> { "и"}}, {prefix {"барин", "и"},
-std::vector<std::string> { "мужик."}} };
+statetab = { {{"Встретились", "на"}, { "дороге", "пути"}} ,
+{{"на", "дороге"}, { "барин"}}, { {"дороге", "барин"},
+{ "и"}}, { {"барин", "и"}, { "мужик."}} };
 std::vector<std::string> eq;
 auto item = statetab.begin();
 while (item != statetab.end()) {
@@ -120,11 +79,12 @@ tmp.push_back(curr[1]); tmp.push_back(expect[curr].at(0));
 curr = tmp;
 num++;
 }
-std::string eq = all[0] +
+std::vector<std::string> vec;
+vec.push_back( all[0] +
 std::string(" ") + all[1] + std::string(" ") +
 all[2] + std::string(" ") + all[3] +
 std::string(" ") + all[4] + std::string(" ") +
-all[5];
-const char ex[] = "Встретились на дороге барин и мужик.";
-EXPECT_EQ(eq, std::string(ex));
+all[5]);
+vec.push_back( "Встретились на дороге барин и мужик.");
+EXPECT_EQ(vec[0], vec[1]);
 }
