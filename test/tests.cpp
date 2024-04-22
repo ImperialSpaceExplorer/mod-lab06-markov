@@ -4,7 +4,7 @@
 
 TEST(Test1, MakePref) {
 typedef std::deque<std::string> prefix;
-const char* st = "Встретились на";
+const char* st = "Встретились на ";
 prefix exp;
 std::vector<std::string> strs = chstr_to_vecstr(st);
 exp.push_back(strs[0]); exp.push_back(strs[1]);
@@ -15,7 +15,7 @@ EXPECT_EQ(exp, eq);
 TEST(Test2, MakePair) {
 typedef std::deque<std::string> prefix;
 std::map<prefix, std::vector<std::string> > statetab;
-const char* st = "Встретились на дороге";
+const char* st = "Встретились на дороге ";
 prefix exp;
 std::vector<std::string> strs = chstr_to_vecstr(st);
 exp.push_back(strs[0]); exp.push_back(strs[1]);
