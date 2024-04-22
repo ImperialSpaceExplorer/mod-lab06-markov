@@ -14,8 +14,8 @@ std::vector<std::string> chstr_to_vecstr(const char* chtext) {
   s.read(words, sizeof(s));
   char* token = std::strtok(words, delimeter);
   while (token != NULL) {
-   exp.push_back(token);
-   token = std::strtok(nullptr, delimeter);
+  exp.push_back(token);
+  token = std::strtok(nullptr, delimeter);
   }
   return exp;
 }
