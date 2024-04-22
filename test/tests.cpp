@@ -19,7 +19,7 @@ const char* st = "Встретились на дороге";
 prefix exp;
 std::vector<std::string> strs = chstr_to_vecstr(st);
 exp.push_back(strs[0]); exp.push_back(strs[1]);
-statetab[exp] = strs[2];
+statetab.insert(exp, strs[2]);
 prefix pr{ "Встретились" , "на" };
 std::map<prefix , std::vector<std::string> >eq = {
 {pr, { "дороге"}} };
@@ -80,11 +80,11 @@ curr = tmp;
 num++;
 }
 std::vector<std::string> vec;
-vec.push_back( all[0] +
+vec.push_back(all[0] +
 std::string(" ") + all[1] + std::string(" ") +
 all[2] + std::string(" ") + all[3] +
 std::string(" ") + all[4] + std::string(" ") +
 all[5]);
-vec.push_back( "Встретились на дороге барин и мужик.");
+vec.push_back("Встретились на дороге барин и мужик.");
 EXPECT_EQ(vec[0], vec[1]);
 }
