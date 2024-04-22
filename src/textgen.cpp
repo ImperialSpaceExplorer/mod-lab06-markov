@@ -6,6 +6,20 @@ const int MAXGEN = 1000;
 
 prefix cur;
 
+std::vector<std::string> chstr_to_vecstr(const char* chtext) {
+  std::vector<std::string> exp;
+  std::stringstream s = std::stringstream(chtext);
+  const char* const delimeter = " ";
+  char* words = new char[sizeof(s)];
+  s.read(words, sizeof(s));
+  char* token = std::strtok(words, delimeter);
+  while (token != NULL) {
+   exp.push_back(token);
+   token = std::strtok(nullptr, delimeter);
+  }
+  return exp;
+}
+
 void finput(std::deque<std::string>* arr) {
 std::ifstream input("data.txt");
 std::deque<std::string> tmp;
