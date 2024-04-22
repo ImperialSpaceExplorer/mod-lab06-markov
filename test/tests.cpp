@@ -19,7 +19,7 @@ const char* st = "Встретились на дороге";
 prefix exp;
 std::vector<std::string> strs = chstr_to_vecstr(st);
 exp.push_back(strs[0]); exp.push_back(strs[1]);
-statetab.insert(exp, strs[2]);
+statetab.insert(exp, {strs[2]});
 prefix pr{ "Встретились" , "на" };
 std::map<prefix , std::vector<std::string> >eq = {
 {pr, { "дороге"}} };
