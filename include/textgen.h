@@ -17,6 +17,8 @@ using u32    = uint_least32_t;
 using engine = std::mt19937;
 typedef std::deque<std::string> prefix;
 
+std::vector<std::string> chstr_to_vecstr(const char* chtext);
+
 void finput(std::deque<std::string>* arr);
 void foutput(std::deque<std::string> arr);
 
